@@ -1,0 +1,15 @@
+<article>
+    <h2>{{ producto().nombre}}</h2>
+    <p>{{ producto().precio}} Bs.</p>
+    @if (producto().disponibilidad) {
+            <p style="color:blue">El producto esta disponible</p>
+        } @else {
+            <p style="color:red">El producto NO esta disponible</p>
+        }
+    <!-- <strong>Disponibilidad: {{ producto().disponibilidad}}</strong> -->
+    <br>
+    <button  type="button"
+        (click)="agregarProducto()">
+        Agregar a la compra
+    </button>
+</article>

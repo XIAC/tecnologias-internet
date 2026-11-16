@@ -1,0 +1,18 @@
+<p>detalle-compra works!</p>
+<div>
+    <h2>Detalle Compra</h2>
+    @if (cantidad() === 0) {
+            <p style="color:red">Aun no hay prpductos</p>
+    } @else {
+            <p style="color:blue">
+                Existe: <strong>{{cantidad()}}</strong>
+            </p>
+    }
+
+    <p>Total: {{ total() }} Bs</p>
+
+    <button  type="button"
+        (click)="vaciar()">
+        Vaciar 
+    </button>
+</div>
