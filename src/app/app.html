@@ -1,21 +1,12 @@
-<h1>{{ asignatura }}</h1>
 
-<strong>Estudiante</strong> : <p> {{estudiante}}</p>
-<strong>Edad</strong> : <p> {{edad}}</p>
-<strong>Inscrito</strong> : <p> {{inscrito}}</p>
 
-<button (click)="asistencia()">
-  Mostrar asistencia
-</button>
-<!-- <p> {{  mensaje() }} </p>
-
-@if (producto.disponibilidad){
+<!-- @if (producto.disponibilidad){
     <p style="color:blue">El producto esta disponible</p>
 } @else {
     <p style="color:red">El producto NO esta disponible</p>
-} -->
+} 
 <strong>----------------------------</strong>
-<!-- COMPONENTE 1 -->
+
  @for(p of productos; track p.id) {
     <app-tarjeta-producto
     [producto] = "p"
@@ -24,15 +15,26 @@
     </app-tarjeta-producto> 
 
  }
-<!-- <app-tarjeta-producto
-    [producto] = "producto"
-    (agregar) = "agregarCompra($event)"
->
-</app-tarjeta-producto> -->
 
-<!-- COMPONENTE 2 -->
 <app-detalle-compra>
     [cantidad] = "cantidad()"
     [total] = "total()"
     (limpiar) = "vaciarDesdeApp()"
-</app-detalle-compra>
+</app-detalle-compra> -->
+
+<header>
+    <strong></strong>
+</header>
+<nav>
+    <a routerLink="/inicio"
+        routerLinkActive="activo" >Inicio</a>
+    <a routerLink="/productos"
+        routerLinkActive="activo" >Productos</a>
+    <a routerLink="/contacto"
+        routerLinkActive="activo" >Contacto</a>
+</nav>
+
+<main>
+    <router-outlet></router-outlet>
+</main>
+<footer>Tecnologias en Internet - 2026</footer>

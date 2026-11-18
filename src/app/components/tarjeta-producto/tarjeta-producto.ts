@@ -1,5 +1,6 @@
 import { Component, input, output } from '@angular/core';
-import { Producto } from '../../app';
+import { Producto } from '../../models/producto';
+
 
 @Component({
   imports: [],
