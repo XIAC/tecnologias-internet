@@ -1,26 +1,32 @@
 
-<section class="productos-container">
+<section >
 
-    <header class="productos-header">
+    <header >
         <h3>Nuestros productos</h3>
         <p>Adquiere nuestros productos de alta calidad</p>
     </header>
 
-    <div class="productos-grid">
-        @for (p of productos; track p.id) {
-            <app-tarjeta-producto
-                [producto]="p"
-                (agregar)="agregarCompra($event)">
-            </app-tarjeta-producto>
-        }
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col">
+                    @for (p of productos; track p.id) {
+                        <app-tarjeta-producto
+                            [producto]="p"
+                            (agregar)="agregarCompra($event)">
+                        </app-tarjeta-producto>
+                    }
+            </div>
+        </div>
+        
 
     </div>
 
-    <div class="compra-container">
+
+    <div >
         <app-detalle-compra
             [cantidad]="cantidad()"
             [total]="total()"
-            (limpiar)="vaciarDesdeApp()">
+            (limpiar)="vaciar()">
         </app-detalle-compra>
     </div>
 

@@ -1,15 +1,20 @@
-<article>
-    <h2>{{ producto().nombre}}</h2>
-    <p>{{ producto().precio}} Bs.</p>
-    @if (producto().disponibilidad) {
-            <p style="color:blue">El producto esta disponible</p>
-        } @else {
-            <p style="color:red">El producto NO esta disponible</p>
-        }
-    <!-- <strong>Disponibilidad: {{ producto().disponibilidad}}</strong> -->
-    <br>
-    <button  type="button"
-        (click)="agregarProducto()">
-        Agregar a la compra
-    </button>
-</article>
+    <!-- <div class="col"> -->
+        <div class="card mb-4" >
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Neckertal_20150527-6384.jpg?utm_source=es.wikipedia.org&utm_campaign=index&utm_content=original" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto().nombre}}</h5>
+                    <p class="card-text">{{ producto().precio}} Bs.</p>
+                    @if (producto().disponibilidad) {
+                        <a href="#" class="btn btn-primary">El producto esta disponible</a>
+                    } @else {
+                    <a href="#" class="btn btn-danger">El producto NO esta disponible </a>
+                    }
+                    <div class="mt-3">
+                        <button type="button" class="btn btn-outline-success "
+                            (click)="agregarProducto()">Agregar a la compra</button>
+                    </div>
+
+                </div>
+            </div>
+    <!-- </div> -->
+   
