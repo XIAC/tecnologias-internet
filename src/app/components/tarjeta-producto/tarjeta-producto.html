@@ -4,11 +4,27 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ producto().nombre}}</h5>
                     <p class="card-text">{{ producto().precio}} Bs.</p>
-                    @if (producto().disponibilidad) {
+                    <p class="card-text">
+                        {{ producto().precio | currency:'BOB': 'BS ' : '1.2-2'}} Bs.
+
+                    </p>
+
+                    <span class="badge"
+                        [ngClass]="{
+                            'bg-success': producto().disponibilidad,
+                            'bg-danger': !producto().disponibilidad
+                        }"
+                        >
+                        {{ producto().disponibilidad ? 'Disponible': 'Se agoto'  }}
+                    </span>
+                    <span class="bg-info">
+                        Este producto se aplica el descuento de : {{descuento | percent}}
+                    </span>
+                    <!-- @if (producto().disponibilidad) {
                         <a href="#" class="btn btn-primary">El producto esta disponible</a>
                     } @else {
                     <a href="#" class="btn btn-danger">El producto NO esta disponible </a>
-                    }
+                    } -->
                     <div class="mt-3">
                         <button type="button" class="btn btn-outline-success "
                             (click)="agregarProducto()">Agregar a la compra</button>

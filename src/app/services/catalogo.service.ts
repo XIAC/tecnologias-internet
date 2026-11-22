@@ -23,7 +23,7 @@ export class CatalogoService{
             id: 3,
             nombre: "monitor",
             precio: 30,
-            disponibilidad: true
+            disponibilidad: false
             }
 
         ];
