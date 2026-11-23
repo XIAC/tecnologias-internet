@@ -4,6 +4,7 @@ import { TarjetaProducto } from '../../components/tarjeta-producto/tarjeta-produ
 import { DetalleCompra } from '../../components/detalle-compra/detalle-compra';
 import { CatalogoService } from '../../services/catalogo.service';
 import { ComprasService } from '../../services/compras.service';
+import { ComprasDBService } from '../../services/index-db.service';
 
 @Component({
   imports: [TarjetaProducto, DetalleCompra],
@@ -17,6 +18,9 @@ export class ProductosComponent {
    readonly productos : readonly Producto[];
    readonly cantidad = this.comprasService.cantidad;
    readonly total = this.comprasService.total;
+
+  private readonly indexedDBService = inject(ComprasDBService);
+
   constructor(catalogoService : CatalogoService){
     this.productos = catalogoService.obtenerProductos();
   }
@@ -31,6 +35,17 @@ export class ProductosComponent {
   vaciar() : void {
     this.comprasService.vaciarDesdeApp();
     this.mensaje.set('La compra esta vacia')
-
+  }
+  // indexdb
+  async mostrarUltimaCompra(): Promise<void>{
+    try {
+      const total = await this.indexedDBService.obtenerUltimoDato();
+      if (total === null){
+        this.mensaje.set('NO hay productos');
+      }
+      this.mensaje.set(`La ultima copra es: ${total?.toFixed(2)} `)
+    } catch (error) {
+        console.log(error);
+    }
   }
 }
