@@ -1,7 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Producto } from '../../models/producto';
 import { TarjetaProducto } from '../../components/tarjeta-producto/tarjeta-producto';
 import { DetalleCompra } from '../../components/detalle-compra/detalle-compra';
+import { CatalogoService } from '../../services/catalogo.service';
+import { ComprasService } from '../../services/compras.service';
 
 @Component({
   imports: [TarjetaProducto, DetalleCompra],
@@ -10,44 +12,25 @@ import { DetalleCompra } from '../../components/detalle-compra/detalle-compra';
   templateUrl: './productos.component.html',
 })
 export class ProductosComponent {
-   mensaje = signal('');
-   cantidad = signal(0);
-   total = signal(0);
-
-   productos : Producto[] =
-  [
-   {
-      id: 1,
-      nombre: "teclado",
-      precio: 130,
-      disponibilidad: true
-    },
-    {
-      id: 2,
-      nombre: "mouse",
-      precio: 50,
-      disponibilidad: true
-    },
-    {
-      id: 3,
-      nombre: "monitor",
-      precio: 30,
-      disponibilidad: true
-    }
-
-  ];
+  mensaje = signal('');
+  private readonly comprasService = inject(ComprasService);
+   readonly productos : readonly Producto[];
+   readonly cantidad = this.comprasService.cantidad;
+   readonly total = this.comprasService.total;
+  constructor(catalogoService : CatalogoService){
+    this.productos = catalogoService.obtenerProductos();
+  }
 
   agregarCompra(producto : Producto) : void {
-    console.log(producto);
-    if (producto.disponibilidad) {
-        this.cantidad.set(this.cantidad() + 1);
-        this.total.set(this.total() + producto.precio);
-        this.mensaje.set('agregaste:' + producto.nombre);
-        console.log(this.cantidad());
+    if (producto.disponibilidad){
+      this.comprasService.agregarCompra(producto);
+      this.mensaje.set(`Agregaste este producto: ${producto.nombre}`)
     }
   }
 
-  vaciarDesdeApp() : void {
-    console.log("esta vacio");
+  vaciar() : void {
+    this.comprasService.vaciarDesdeApp();
+    this.mensaje.set('La compra esta vacia')
+
   }
 }
